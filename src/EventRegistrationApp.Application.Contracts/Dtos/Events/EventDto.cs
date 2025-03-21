@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 
@@ -29,6 +30,8 @@ namespace EventRegistrationApp.Dtos.Events
         public bool IsOnline { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        //[HideInForm]
         public Guid OrganizerId { get; set; }
         public string Link { get; set; }
         public string Location { get; set; }
