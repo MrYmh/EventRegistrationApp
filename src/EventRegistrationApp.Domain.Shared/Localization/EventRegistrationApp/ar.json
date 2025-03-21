@@ -1,0 +1,30 @@
+{
+  "culture": "ar",
+  "texts": {
+    "EventName": "اسم الحدث",
+    "Capacity": "السعة",
+    "IsOnline": "عبر الإنترنت",
+    "StartDate": "تاريخ البدء",
+    "EndDate": "تاريخ الانتهاء",
+    "Organizer": "المنظم",
+    "Link": "الرابط",
+    "Location": "الموقع",
+    "IsActive": "نشط",
+    "Details": "تفاصيل",
+    "AppName": "EventRegistrationApp",
+    "Menu:Home": "الصفحة الرئيسية",
+    "Menu:Event": "المناسبة",
+    "Menu:Events": "المناسبات",
+    "Welcome": "مرحباً",
+    "Update": "تحديث",
+    "EventDeletionConfirmationMessage": "هل أنت متأكد من حذف الحدث '{0}'؟",
+    "SuccessfullyDeleted": "تم الحذف بنجاح!",
+    "RegistrationSuccessful": "تم التسجيل بنجاح!",
+    "CancellationSuccessful": "تم الإلغاء بنجاح!",
+    "EventDetails": "تفاصيل الحدث",
+    "Register": "تسجيل",
+    "CancelRegistration": "إلغاء التسجيل",
+    "BackToList": "العودة إلى القائمة",
+    "LongWelcomeMessage": "مرحبا بكم في التطبيق. هذا مشروع بدء تشغيل يعتمد على إطار عمل ABP. لمزيد من المعلومات ، يرجى زيارة abp.io."
+  }
+}
