@@ -16,8 +16,7 @@ namespace EventRegistrationApp.Interface
         PagedAndSortedResultRequestDto, 
         CreateUpdateEventDto> 
     {
-        
 
-        //Task<List<EventDto>> GetListAsync();
+        Task<List<EventDto>> GetEventsAsync();
     }
 }

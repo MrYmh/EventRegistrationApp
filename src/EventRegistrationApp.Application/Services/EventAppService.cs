@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -56,11 +57,11 @@ namespace EventRegistrationApp.Services
             await base.DeleteAsync(id);
         }
 
-        public override Task<PagedResultDto<EventDto>> GetListAsync(PagedAndSortedResultRequestDto input)
-        {
-            var x = base.GetListAsync(input);
-            return base.GetListAsync(input);
-        }
+        //public override Task<PagedResultDto<EventDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        //{
+        //    var x = base.GetListAsync(input);
+        //    return base.GetListAsync(input);
+        //}
         public async Task<List<EventDto>> GetEventsAsync()
         {
             var query = await Repository.GetQueryableAsync();
@@ -78,6 +79,40 @@ namespace EventRegistrationApp.Services
 
             var events = await AsyncExecuter.ToListAsync(query);
             return ObjectMapper.Map<List<Event>, List<EventDto>>(events);
+        }
+        public override async Task<PagedResultDto<EventDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        {
+            // Get the base query
+            var query = await Repository.GetQueryableAsync();
+
+            // Apply filters based on user role
+            if (CurrentUser.IsInRole("admin"))
+            {
+                // Admins can see all their events (active and inactive)
+                query = query.Where(e => e.OrganizerId == CurrentUser.Id);
+            }
+            else
+            {
+                // Non-admin users can only see active events
+                query = query.Where(e => e.IsActive);
+            }
+
+            // Apply sorting
+            if (!input.Sorting.IsNullOrWhiteSpace())
+            {
+                query = query.OrderBy(input.Sorting);
+            }
+
+            // Apply pagination
+            var totalCount = await AsyncExecuter.CountAsync(query);
+            query = query.PageBy(input);
+
+            // Execute the query and map the results
+            var events = await AsyncExecuter.ToListAsync(query);
+            var eventDtos = ObjectMapper.Map<List<Event>, List<EventDto>>(events);
+
+            // Return the paged result
+            return new PagedResultDto<EventDto>(totalCount, eventDtos);
         }
         //get all active events
 

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{Id:guid}"
 @using EventRegistrationApp.Localization
 @using EventRegistrationApp.Web.Pages.Events
 @using Microsoft.Extensions.Localization
@@ -11,6 +11,7 @@
         <h2>@L["EventDetails"]</h2>
     </abp-card-header>
     <abp-card-body>
+        <input type="hidden" id="Event_Id" value="@Model.Event.Id" />
         <abp-input asp-for="Event.NameEn" readonly="true" />
         <abp-input asp-for="Event.NameAr" readonly="true" />
         <abp-input asp-for="Event.Capacity" readonly="true" />

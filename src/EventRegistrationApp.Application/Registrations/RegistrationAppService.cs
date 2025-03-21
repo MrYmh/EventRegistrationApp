@@ -1,5 +1,6 @@
 ﻿using EventRegistrationApp.Events;
 using EventRegistrationApp.Registerations;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace EventRegistrationApp.Registrations
 {
+    [Route("api/app/registration")]
     public class RegistrationAppService : EventRegistrationAppAppService, IRegistrationAppService
     {
         private readonly IRepository<Registration, Guid> _registrationRepository;
@@ -22,6 +24,7 @@ namespace EventRegistrationApp.Registrations
             _eventRepository = eventRepository;
         }
 
+        [HttpPost("register")]
         public async Task RegisterAsync(Guid eventId)
         {
             var eventEntity = await _eventRepository.GetAsync(eventId);
@@ -50,6 +53,7 @@ namespace EventRegistrationApp.Registrations
             await _registrationRepository.InsertAsync(registration);
         }
 
+        [HttpPost("cancel")]
         public async Task CancelRegistrationAsync(Guid eventId)
         {
             var eventEntity = await _eventRepository.GetAsync(eventId);
