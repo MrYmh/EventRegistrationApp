@@ -31,6 +31,12 @@ namespace EventRegistrationApp.Services
            
         }
 
+        public override Task<EventDto> CreateAsync(CreateUpdateEventDto input)
+        {
+            input.OrganizerId = CurrentUser.Id.Value;
+            return base.CreateAsync(input);
+        }
+
         public override async Task<EventDto> UpdateAsync(Guid id, CreateUpdateEventDto input)
         {
             var eventEntity = await Repository.GetAsync(id);

@@ -23,8 +23,16 @@
         <abp-input asp-for="Event.IsActive" readonly="true" />
     </abp-card-body>
     <abp-card-footer>
-        <abp-button id="RegisterButton" text="@L["Register"]" />
-        <abp-button id="CancelRegistrationButton" text="@L["CancelRegistration"]" />
+        @if (!Model.IsUserRegistered)
+        {
+            <button id="RegisterButton" class=" btn-success register">@L["Register"]</button>
+        }
+        else
+        {
+            <button id="CancelRegistrationButton" class="btn-danger cancel">@L["CancelRegistration"]</button>
+        }
+        @* <abp-button id="RegisterButton" text="@L["Register"]" /> *@
+        @* <abp-button id="CancelRegistrationButton" text="@L["CancelRegistration"]" /> *@
     </abp-card-footer>
 </abp-card>
 
